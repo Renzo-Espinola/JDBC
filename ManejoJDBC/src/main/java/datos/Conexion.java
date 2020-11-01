@@ -3,7 +3,7 @@ package datos;
 import java.sql.*;
 
 public class Conexion {
- private static final String JDBC_URL= "jdbc:sqlite:/C:/Users/renzo/Desktop/db/sample.db";
+ private static final String JDBC_URL= ("jdbc:sqlite:" + Conexion.class.getClassLoader().getResource("sample.db"));
  private static final String JDBC_USER = "";
  private static final String JDBC_PASSWORD = "";
 

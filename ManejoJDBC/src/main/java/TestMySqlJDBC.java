@@ -3,8 +3,8 @@ import java.sql.*;
 import static java.lang.Class.forName;
 
 public class TestMySqlJDBC {
-    public static void main(String[] args) {
-        var url = "jdbc:sqlite:/C:/Users/renzo/Desktop/db/sample.db";
+  /*  public static void main(String[] args) {
+      var url = "jdbc:sqlite:" + TestMySqlJDBC.class.getClassLoader().getResource("sample.db");
         try {
             //Class.forName("org.sqlite.JDBC");
             Connection conexion = DriverManager.getConnection(url);
@@ -24,9 +24,8 @@ public class TestMySqlJDBC {
             conexion.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
-        /*} catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
         }
+    }*/
+
     }
-}
+
