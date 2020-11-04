@@ -1,15 +1,22 @@
+import datos.Conexion;
+
 import java.sql.*;
 
 import static java.lang.Class.forName;
 
 public class TestMySqlJDBC {
-  /*  public static void main(String[] args) {
-      var url = "jdbc:sqlite:" + TestMySqlJDBC.class.getClassLoader().getResource("sample.db");
+    public static void main(String[] args) {
+
+        Conexion con = new Conexion();
+        con.getConnect();
+        con.close();
+
+
         try {
             //Class.forName("org.sqlite.JDBC");
-            Connection conexion = DriverManager.getConnection(url);
+            Connection conexion = con.getConnect();
             Statement instruccion = conexion.createStatement();
-            var sql ="SELECT id_persona, nombre, apellido, email, telefono FROM persona";
+            String sql ="SELECT id_persona, nombre, apellido, email, telefono FROM persona";
             ResultSet resultado = instruccion.executeQuery(sql);
             while (resultado.next()){
                 System.out.print("id_persona: "+ resultado.getInt("id_persona"));
@@ -25,7 +32,5 @@ public class TestMySqlJDBC {
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         }
-    }*/
-
     }
-
+}

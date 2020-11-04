@@ -12,21 +12,21 @@ public class PersonaDAO {
     private static final String SQL_INSERT = "INSERT INTO persona (nombre, apellido, email, telefono) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE persona SET nombre = ?, apellido = ?, email = ?, telefono = ? WHERE id_persona = ?";
 
-
-
+    private Connection conn;
 
     private static final String SQL_DELETE = "DELETE FROM persona WHERE id_persona = ?";
 
+    private Conexion conexion= new Conexion();
+
 
     public List<Persona> seleccionar() {
-        Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Persona persona = null;
         List<Persona> personas = new ArrayList<>();
 
         try {
-            conn = getConnection();
+            conn = conexion.getConnect();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -43,18 +43,8 @@ public class PersonaDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         } finally {
-
-            try {
-                close(rs);
-                close(stmt);
-                close(conn);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace(System.out);
-            }
-
-
+                conexion.close();
         }
-
         return personas;
     }
 
@@ -63,7 +53,7 @@ public class PersonaDAO {
         PreparedStatement stmt = null;
         int registros = 0;
         try {
-            conn = getConnection();
+            conn = conexion.getConnect();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, persona.getNombre());
             stmt.setString(2, persona.getApellido());
@@ -75,13 +65,7 @@ public class PersonaDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         } finally {
-            try {
-                close(stmt);
-                close(conn);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace(System.out);
-            }
-
+            conexion.close();
         }
         return registros;
     }
@@ -91,7 +75,7 @@ public class PersonaDAO {
         PreparedStatement stmt = null;
         int registros = 0;
         try {
-            conn = getConnection();
+            conn = conexion.getConnect();
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, persona.getNombre());
             stmt.setString(2, persona.getApellido());
@@ -103,14 +87,7 @@ public class PersonaDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace(System.out);
         } finally {
-            try {
-                close(stmt);
-                close(conn);
-
-            } catch (SQLException throwables) {
-                throwables.printStackTrace(System.out);
-            }
-
+            conexion.close();
             return registros;
         }
 
@@ -120,7 +97,7 @@ public class PersonaDAO {
         PreparedStatement stmt = null;
 
         try {
-            conn = getConnection();
+            conn = conexion.getConnect();
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1,persona.getIdPersona());
             stmt.execute();
@@ -128,13 +105,7 @@ public class PersonaDAO {
             throwables.printStackTrace(System.out);
         }
       finally {
-
-            try {
-                close(stmt);
-                close(conn);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace(System.out);
-            }
+            conexion.close();
         }
 
     }

@@ -7,7 +7,7 @@ public class TestManejoPersonas {
     public static void main(String[] args) {
         PersonaDAO personaDao = new PersonaDAO();
        //Insertar un nuevo objeto de tipo Persona
-        Persona personaNueva = new Persona("renzo","Espinola", "AtheEspinola@gmail.com", "44706");
+        Persona personaNueva = new Persona("Jorge","Espinola", "AtheEspinola@gmail.com", "44706");
         personaDao.insertar(personaNueva);
 
         //Persona personaMod = new Persona(7,"Tatiana","Rios", "tati@gmail.com", "44706");
